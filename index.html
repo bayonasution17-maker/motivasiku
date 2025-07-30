@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motivasi Harian</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f0f4f8;
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    #motivasi {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    .tanggal {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌞 Kata-Kata Motivasi Hari Ini</h1>
+    <div id="motivasi">Memuat motivasi...</div>
+    <div class="tanggal" id="tanggal"></div>
+  </div>
+
+  <script>
+    async function loadMotivasi() {
+      const res = await fetch("motivasi.json");
+      const data = await res.json();
+      const today = new Date().toISOString().slice(0, 10); // format YYYY-MM-DD
+      document.getElementById("tanggal").innerText = today;
+      document.getElementById("motivasi").innerText = data[today] || "Tetap semangat, meski belum ada kata khusus hari ini!";
+    }
+
+    loadMotivasi();
+  </script>
+</body>
+</html>
